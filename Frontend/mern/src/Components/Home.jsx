@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Home = () => {
   const [data, setData] = useState([]);
+  
   const token = localStorage.getItem('Token');
 
   const getdata = () => {
@@ -12,7 +13,7 @@ const Home = () => {
       },
     })
       .then((res) => res.json())
-      .then((res) => setData(res))
+      // .then((res) => setData(res))
       .then((res) => console.log(res))
       .catch((err) => {
         console.error('Error fetching data:', err);
@@ -21,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     getdata();
-  }, [token]); 
+  }, []); 
 
   return (
     <div>
