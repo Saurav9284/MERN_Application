@@ -2,6 +2,8 @@
 const express = require('express');
 const { connection,PORT} = require('./Config/db');
 const {userController} = require("./routes/user.route");
+const {authentication} = require("./Middlewares/authentication")
+const {notesController} = require("./routes/notes.routes")
 
 
  const app = express();
@@ -13,7 +15,8 @@ const {userController} = require("./routes/user.route");
  })
 
  app.use("/user",userController);
- 
+ app.use(authentication);
+ app.use("/notes",notesController);
 
  app.listen(PORT, async () => {
     try {
