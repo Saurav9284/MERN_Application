@@ -11,19 +11,19 @@ const notesController = Router();
 
 
 notesController.get("/", async (req,res)=>{
-    const notes = await NoteModel.find({createrId: req.body.createrId})
+    const notes = await NoteModel.find({userId: req.body.userId})
     res.send(notes);
 })
 
 
 
 notesController.post("/create", async (req,res)=>{
-    const {Heading, Note , Tag, createrId} = req.body;
+    const {Heading, Note , Tag, userId} = req.body;
     const note = new NoteModel({
         Heading,
         Note,
         Tag,
-        createrId
+        userId
     })
     try {
         await note.save();
@@ -37,7 +37,7 @@ notesController.post("/create", async (req,res)=>{
 
 notesController.delete("/delete/:noteId", async (req,res)=> {
     const {noteId} = req.params;
-    const deleteNote = await NoteModel.findOneAndDelete({_id: noteId, createrId: req.body.createrId})
+    const deleteNote = await NoteModel.findOneAndDelete({_id: noteId, userId: req.body.userId})
     if(deleteNote){
         res.send("Deleted")
     }
@@ -49,7 +49,7 @@ notesController.delete("/delete/:noteId", async (req,res)=> {
 
 notesController.patch("/edit/:noteId", async (req,res)=> {
     const {noteId} = req.params;
-    const editedNote = await NoteModel.findOneAndUpdate({_id: noteId, createrId: req.body.createrId},{...req.body})
+    const editedNote = await NoteModel.findOneAndUpdate({_id: noteId, userId: req.body.userId},{...req.body})
     if(editedNote){
         res.send("Updated")
     }

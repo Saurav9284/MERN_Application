@@ -14,9 +14,9 @@ const {notesController} = require("./routes/notes.routes")
     res.send("Home page");
  })
 
- app.use("/user",userController);
- app.use(authentication);
- app.use("/notes",notesController);
+ app.use("/user",userController)
+ app.use(authentication)
+ app.use("/notes",notesController)
 
  app.listen(PORT, async () => {
     try {
