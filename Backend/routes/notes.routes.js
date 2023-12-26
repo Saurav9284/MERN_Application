@@ -27,9 +27,9 @@ notesController.post("/create", async (req,res)=>{
     })
     try {
         await note.save();
-        res.send("Note Created!!")
+        res.send({msg: "Note Created!!"})
     } catch (error) {
-        res.send("Something went wrong")
+        res.send({msg: "Something went wrong"})
         console.log(error)
     }
 });
@@ -39,10 +39,10 @@ notesController.delete("/delete/:noteId", async (req,res)=> {
     const {noteId} = req.params;
     const deleteNote = await NoteModel.findOneAndDelete({_id: noteId, userId: req.body.userId})
     if(deleteNote){
-        res.send("Deleted")
+        res.send({msg: "Deleted"})
     }
     else{
-        res.send("Not deleted")
+        res.send({msg: "Not deleted"})
     }
 });
 
@@ -51,10 +51,10 @@ notesController.patch("/edit/:noteId", async (req,res)=> {
     const {noteId} = req.params;
     const editedNote = await NoteModel.findOneAndUpdate({_id: noteId, userId: req.body.userId},{...req.body})
     if(editedNote){
-        res.send("Updated")
+        res.send({msg: "Updated"})
     }
     else{
-        res.send("Not Updated")
+        res.send({msg: "Not Updated"})
     }
 });
 
