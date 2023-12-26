@@ -4,6 +4,7 @@ const { connection,PORT} = require('./Config/db');
 const {userController} = require("./routes/user.route");
 const {authentication} = require("./Middlewares/authentication")
 const {notesController} = require("./routes/notes.routes")
+const cors = require("cors");
 
 
  const app = express();
